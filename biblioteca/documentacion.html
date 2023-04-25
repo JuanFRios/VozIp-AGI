@@ -1,0 +1,127 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.6 [en] (Win95; I) [Netscape]">
+   <title>documentacion</title>
+</head>
+<body background="back-353.gif">
+<b><i><font color="#990000"><font size=+3>&nbsp;</font></font></i></b>
+<br><b><i><font color="#990000"><font size=+3>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+DOCUMENTACI&Oacute;N</font></font></i></b>
+<br><b><font color="#000000"></font></b>&nbsp;
+<br><b><font color="#000000"></font></b>&nbsp;
+<blockquote><b><font color="#000000">Para ejecutar esta aplicaci&oacute;n
+debe realizar los siguientes pasos:</font></b><b><font color="#000000"></font></b>
+<p><b><font color="#000000">1. Debe instalar :</font></b>
+<br><b>Apache para Windows.</b>
+<br><b>PHP4.0</b>
+<br><b>MySQL</b>
+<br><b>Myadmin.</b><b></b>
+<p><b>Puede encontrar informaci&oacute;n acerca del proceso de instalaci&oacute;n&nbsp;
+en las siguientes direcciones:</b>
+<br><b><a href="../../www.php.net">www.php.net</a></b>
+<br><b><a href="../../www.apache.org">www.apache.org</a></b>
+<br><b><a href="../../www.neuroweb.org">www.neuroweb.org</a></b>
+<br><b><a href="../../www.mysql.com">www.mysql.com</a></b>
+<br><b><a href="../../www.mysql.com">www.phpwizard.net</a></b><b></b>
+<p><b>2. Luego de la instalaci&oacute;n, utilizando myadmin&nbsp; debes
+crear una base de Datos llamada Biblioteca y crear en ella siguiente tabla.</b><b></b>
+<p><b><font color="#006600">CREATE TABLE libros (libro INT NOT NULL AUTO_INCREMENT,
+nombre CHAR(100), autor CHAR(50), tema CHAR(15), comentario CHAR(100),
+KEY (libro) );</font></b><b><font color="#006600"></font></b>
+<p><b><font color="#006600">INSERT INTO libros VALUES (1, 'La Cenicienta',
+'Charles Perrault',</font></b>
+<br><b><font color="#006600">&nbsp; 'Cuentos Infantiles', 'Es un cuento
+muy interesante' );</font></b><b><font color="#006600"></font></b>
+<p><b><font color="#006600">INSERT INTO libros VALUES (2, ' Cuentos de
+siempre', 'Saturnino Callejas',&nbsp; 'Cuentos Infantiles', 'Es una colecci&oacute;n
+con Cuentos excelentes' );</font></b><b><font color="#006600"></font></b>
+<p><b><font color="#006600">INSERT INTO libros VALUES (3, 'La Bella Durmiente',
+'Grimm Hermanos',&nbsp; 'Cuentos Infantiles', 'Es un buen cuento' );</font></b><b><font color="#006600"></font></b>
+<p><b><font color="#006600">INSERT INTO libros VALUES (4, 'Caperucita Roja',
+'Grimm Hermanos',&nbsp; 'Cuento Infantil', 'Historia de una ni&ntilde;a
+y un lobo que....' );</font></b><b><font color="#006600"></font></b>
+<p><b><font color="#006600">INSERT INTO libros VALUES (5, '20 de julio',
+'Rosa Elena Angel',&nbsp; 'Historia', 'Historia de Colombia' );</font></b><b><font color="#006600"></font></b>
+<p><b><font color="#006600">INSERT INTO libros VALUES (6, 'Ciudades de
+Colombia', 'Enrique Emilio Franco',&nbsp; 'Geograf&iacute;a', 'Un recorrido
+por la geograf&iacute;a Colombiana' );</font></b>
+<br><b></b>&nbsp;<b></b>
+<p><b>Puedes insertar mas datos si los deseas.</b><b></b>
+<p><b>3. Despu&eacute;s&nbsp; puedes mirar el c&oacute;digo de cada una
+de las p&aacute;ginas de esta aplicaci&oacute;n y observar&nbsp; c&oacute;mo
+se realiza la conexi&oacute;n a la base de datos&nbsp; y&nbsp; la consultas
+de cada aplicaci&oacute;n, por ejemplo para la b&uacute;squeda por palabra
+clave es c&oacute;digo es el siguiente.</b><b></b>
+<p><b><font color="#006600">&lt;html></font></b>
+<br><b><font color="#006600">&lt;body></font></b>
+<br><b><font color="#006600">&lt;form></font></b>
+<br><b><font color="#006600">&lt;strong>Palabra Clave:&lt;/strong> &lt;input
+type="text" name="T1" size="20">&lt;br>&lt;br></font></b>
+<br><b><font color="#006600">&lt;input type="submit" value="Buscar" name="buscar"></font></b>
+<br><b><font color="#006600">&lt;/form></font></b>
+<br><b><font color="#006600">&lt;body bgcolor="#769AB4"></font></b>
+<br><b><font color="#006600">&lt;b></font></b>
+<br><b><font color="#006600">&lt;?php</font></b>
+<br><b><font color="#006600">if (!isset($buscar)){</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "Debe
+especificar una cadena a buscar";</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "&lt;/html>&lt;/body>
+\n";</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; exit;</font></b>
+<br><b><font color="#006600">}</font></b>
+<br><b><font color="#006600">$link = mysql_connect("pc-140.red-udea", "root");</font></b>
+<br><b><font color="#006600">mysql_select_db("Biblioteca", $link);</font></b>
+<br><b><font color="#006600">$result = mysql_query("SELECT * FROM libros
+WHERE nombre LIKE '%$T1%' ORDER BY nombre", $link);</font></b>
+<br><b><font color="#006600">if ($row = mysql_fetch_array($result)){</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "&lt;table
+border = '1'> \n";</font></b>
+<br><b><font color="#006600">//Mostramos los nombres de las tablas</font></b>
+<br><b><font color="#006600">echo "&lt;tr> \n";</font></b>
+<br><b><font color="#006600">while ($field = mysql_fetch_field($result)){</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+echo "&lt;td>$field->name&lt;/td> \n";</font></b>
+<br><b><font color="#006600">}</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo "&lt;/tr>
+\n";</font></b>
+<br><b><font color="#006600">do {</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+echo "&lt;tr> \n";</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+echo "&lt;td>".$row["libro"]."&lt;/td> \n";</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+echo "&lt;td>".$row["nombre"]."&lt;/td> \n";</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+echo "&lt;td>".$row["autor"]."&lt;/td> \n";</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+echo "&lt;td>".$row["tema"]."&lt;/td> \n";</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+echo "&lt;td>".$row["comentario"]."&lt;/td> \n";</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+echo "&lt;/tr> \n";</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } while ($row
+= mysql_fetch_array($result));</font></b>
+<br><b><font color="#006600">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+echo "&lt;/table> \n";</font></b>
+<br><b><font color="#006600">} else {</font></b>
+<br><b><font color="#006600">echo "&iexcl; No se ha encontrado ning&uacute;n
+registro !";</font></b>
+<br><b><font color="#006600">}</font></b>
+<br><b><font color="#006600">?></font></b>
+<br><b><font color="#006600">&nbsp;</font></b>
+<br><b><font color="#006600">&lt;/body></font></b>
+<br><b><font color="#006600">&lt;/html></font></b><b></b>
+<p><b>La funci&oacute;n mysql_connect("pc-140.red -udea", "root");&nbsp;
+conecta&nbsp; a la base de datos del servidor pc-140.red-udea., se debe
+especificar el servidor y password en el cu&aacute;l se encuentra la base
+de datos.</b><b></b>
+<p><b>La variable $result = mysql_query("SELECT * FROM libros WHERE nombre
+LIKE '%$T1%' ORDER BY nombre", $link); almacena el resultado de la consulta
+SQL.</b>
+<br><b></b>&nbsp;
+<br><b></b>&nbsp;</blockquote>
+
+</body>
+</html>
